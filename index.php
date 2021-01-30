@@ -16,6 +16,8 @@
         }
         if(!empty($_POST['getEmpMachines'])){
             $id = $_POST['empMachines'];
+            $empName = $service->getEmployeeById($id);
+            $name = $empName->surname;
             $machines = $service->getAllEmployeeMachines($id);
         }
         if(!empty($_POST['assignForm'])){
@@ -38,6 +40,13 @@
             $emp_passwd = $_POST['password'];
             $emp = new Employee(NULL, $emp_surname, $emp_passwd);
             $service->insert_record('Employee', $emp);
+        }
+        if(!empty($_POST['returnMachine'])){
+            $machinePOST = $_POST['machineid'];
+            $getMachine = $service->getMachineById($machinePOST);
+            $getMachine->set_service($service);
+            $getMachine->back_to_warehouse();
+ 
         }
     }
      
@@ -100,6 +109,11 @@
         #getEmpMachines {
             margin-top: 10px;
             width: 300px;
+        }
+
+        #assigned-machine {
+            display: flex;
+            justify-content: space-between;
         }
     </style>
 </head>
@@ -177,7 +191,14 @@
                     foreach($machines as $machine){
                         ?>
                         <tr>
-                            <td><?php echo $machine->title ?></td>
+                            <td id="assigned-machine">
+                            <?php echo $machine->title ?>
+                            <form action="<?php echo $_SERVER["PHP_SELF"] ;?>" method="POST">
+                                    <input type="hidden" name="machineid" id="bar" value="<?php echo $machine->id; ?>" > 
+                                    <input type="submit" name="returnMachine" value="Return Machine">
+                                </form>
+                            </td>
+                            
                         </tr>
                         <?php
                     }
