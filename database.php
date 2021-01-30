@@ -215,7 +215,7 @@ class Database {
  */
 
     function getEmployeeById($id){
-        $sql = "SELECT ID, Surname, Password FROM Employee WHERE ID = $id";
+        $sql = "SELECT ID, Surname, Password FROM Employees WHERE ID = $id";
         $result = $this->link->query($sql);
         
         $emp;
@@ -232,7 +232,7 @@ class Database {
      * Fetches all the machines that are in use and who is using them
      */
     function get_list_of_machines_and_usage(){
-        $sql = "SELECT Title, Surname, Password FROM machine M JOIN employee e 
+        $sql = "SELECT Title, Surname, Password FROM machines M JOIN employee e 
         ON M.emp_ID = e.ID;";
         $result = $this->link->query($sql);
 
@@ -256,7 +256,7 @@ class Database {
      * select box I solved both those problems.
      */
     function getEmployeeIdFromName($name){
-        $sql = "SELECT ID FROM employee e WHERE e.Surname = '$name';";
+        $sql = "SELECT ID FROM employees e WHERE e.Surname = '$name';";
         $result = $this->link->query($sql);
 
         $arr = array();
@@ -269,7 +269,7 @@ class Database {
     }
 
     function getAllEmployees(){
-        $sql = "SELECT ID, Surname FROM employee;";
+        $sql = "SELECT ID, Surname FROM employees;";
         $result = $this->link->query($sql);
         $results = array();
         if($result->num_rows > 0){
@@ -285,7 +285,7 @@ class Database {
      * We do not want the machines already assigned.
      */
     function getAllUnassignedMachines(){
-        $sql = "SELECT ID, Title FROM machine m WHERE m.emp_ID IS NULL;";
+        $sql = "SELECT ID, Title FROM machines m WHERE m.emp_ID IS NULL;";
         $result = $this->link->query($sql);
         $results = array();
         if($result->num_rows > 0){
@@ -297,7 +297,7 @@ class Database {
     }
 
     function getMachineById($id){
-        $sql = "SELECT ID, Title FROM Machine WHERE ID = $id";
+        $sql = "SELECT ID, Title FROM Machines WHERE ID = $id";
         $result = $this->link->query($sql);
 
         $machine;
@@ -332,7 +332,7 @@ class Database {
      * field in the corresponding table to that employee id
      */
     public function assignEmployeeToMachine($empID, $machineID){
-         $this->update_table('Machine', [
+         $this->update_table('Machines', [
             'emp_ID' => $empID
         ], $machineID);
     }
@@ -345,7 +345,7 @@ class Database {
      * field in the corresponding table to NULL
      */
     public function returnMachine($machineID){
-         $this->update_table('Machine', [
+         $this->update_table('Machines', [
             'emp_ID' => 'NULL'
         ], $machineID);
         
@@ -361,7 +361,7 @@ class Database {
      * 
      */
     public function getAllEmployeeMachinesByEmployeeID($id){
-        $sql = "SELECT ID, Title FROM Machine WHERE emp_ID = $id";
+        $sql = "SELECT ID, Title FROM Machines WHERE emp_ID = $id";
         $result = $this->link->query($sql);
         $data = array();
         

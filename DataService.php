@@ -30,19 +30,19 @@ class DataService {
         /**
          * Insert some records to start with
          */
-        /*$db->insert_record('employee', ['Surname' => 'Snorri', 'Password' => 'abcd1234']);
-        $db->insert_record('employee', ['Surname' => 'Goethe', 'Password' => 'faust123']);
-        $db->insert_record('employee', ['Surname' => 'Einstein', 'Password' => 'existence']);
-        $db->insert_record('employee', ['Surname' => 'V', 'Password' => 'vvv']);
+        $this->db->insert_record('employees', ['Surname' => 'Benz', 'Password' => 'Merzedes']);
+        $this->db->insert_record('employees', ['Surname' => 'Goethe', 'Password' => 'faust123']);
+        $this->db->insert_record('employees', ['Surname' => 'Einstein', 'Password' => 'existence']);
+        $this->db->insert_record('employees', ['Surname' => 'Rothschild', 'Password' => 'control']);
 
-        $db->insert_record('machine', ['Title' => 'Drill']);
-        $db->insert_record('machine', ['Title' => 'Hacksaw']);
-        $db->insert_record('machine', ['Title' => 'Forklift']);
-        $db->insert_record('machine', ['Title' => 'Crane']);
+        $this->db->insert_record('machines', ['Title' => 'Drill']);
+        $this->db->insert_record('machines', ['Title' => 'Hacksaw']);
+        $this->db->insert_record('machines', ['Title' => 'Forklift']);
+        $this->db->insert_record('machines', ['Title' => 'Crane']);
 
 
-        $db->alter_table('Machine', 'ADD emp_ID INT(6);');
-        $db->alter_table('Machine', 'ADD FOREIGN KEY (emp_ID) REFERENCES Employee(ID)');*/
+        $this->db->alter_table('Machines', 'ADD emp_ID INT(6);');
+        $this->db->alter_table('Machines', 'ADD FOREIGN KEY (emp_ID) REFERENCES Employee(ID)');
     }
 
     public function getEmployeeById($id){

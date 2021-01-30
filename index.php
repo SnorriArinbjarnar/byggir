@@ -1,5 +1,5 @@
 <?php 
-    include('./DataService.php');
+    include_once('./DataService.php');
 
     $service = new DataService('hello');
     $data = $service->getListOfMachinesAndUsage();
